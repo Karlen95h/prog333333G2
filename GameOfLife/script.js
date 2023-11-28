@@ -140,4 +140,4 @@ function draw() {
 }
 
 
-console.log("Shnorhavor amanor ev surb cnund");
+console.log("Welcome to prog3");
