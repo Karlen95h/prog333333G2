@@ -1,4 +1,5 @@
-class gishatich extends LivingCreature {
+let LivingCreature = require("./LivingCreature")
+module.exports = class Gishatich extends LivingCreature {
     constructor(x, y) {
         super(x,y)
         this.energy = 3;
@@ -54,7 +55,7 @@ class gishatich extends LivingCreature {
             let x = exact[0];
             let y = exact[1];
 
-            let eater = new gishatich(x, y);
+            let eater = new Gishatich(x, y);
             matrix[y][x] = 0;
             gishatichner.push(eater);
             this.energy = 3;
