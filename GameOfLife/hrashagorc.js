@@ -1,4 +1,5 @@
 let LivingCreature = require("./LivingCreature")
+let GrassEater = require("./grassEater")
 module.exports = class Hrashagorc extends LivingCreature {
     constructor(x, y) {
        super(x,y)
@@ -39,6 +40,8 @@ module.exports = class Hrashagorc extends LivingCreature {
             let x = exact[0];
             let y = exact[1];
             matrix[y][x] = 4;
+
+
             let grasseater = new GrassEater(this.x, this.y);
             matrix[this.y][this.x] = 2;
             grassEaterArr.push(grasseater);

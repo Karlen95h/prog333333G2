@@ -16,7 +16,7 @@ server.listen(3000, () => {
 
 
 function matrixGenerator(matrixSize, grassCount, grassEaterCount, gishatichnerCount, hrashagorccount, vorsordcount, xotabuyscount) {
-var matrix = [];
+     var matrix = [];
     
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = []
@@ -54,9 +54,12 @@ var matrix = [];
         let y = Math.floor(Math.random() * matrixSize);
         matrix[y][x] = 6;
     }
+
+    return matrix
 }
 
-let matrix =  matrixGenerator(30, 30, 10, 10, 10, 10, 10)
+ matrix =  matrixGenerator(30, 30, 10, 10, 10, 10, 10)
+console.log(matrix ," matrix");
 
 
 io.sockets.emit("send matrix",matrix)
@@ -85,4 +88,86 @@ io.sockets.emit("send matrix",matrix)
 
  ///
 
+function createObject(matrix){
+    for (let y = 0; y < matrix.length; y++) {
+        for (let x = 0; x < matrix[y].length; x++) {
 
+            if (matrix[y][x] == 1) {
+                let gr = new Grass(x, y);
+                grassArr.push(gr);
+            }
+            else if (matrix[y][x] == 2) {
+                let eater = new GrassEater(x, y);
+                grassEaterArr.push(eater);
+            }
+            else if (matrix[y][x] == 3) {
+                let eater = new Gishatich(x, y);
+                gishatichner.push(eater);
+            }
+            else if (matrix[y][x] == 4) {
+                let eater = new Hrashagorc(x, y);
+                hrashagorcarr.push(eater);
+            }
+            else if (matrix[y][x] == 5) {
+                let eater = new Vorsord(x, y);
+                vorsordarr.push(eater);
+            }
+            else if (matrix[y][x] == 6) {
+                let eater = new Xotabuys(x, y);
+                xotabuysarr.push(eater);
+            }
+        }
+    }
+
+
+      io.sockets.emit("send matrix",matrix)
+}
+
+
+
+
+
+function game(){
+    for (let i = 0; i < grassArr.length; i++) {
+        const grass = grassArr[i];
+        grass.mul();
+    }
+    for (let i = 0; i < grassEaterArr.length; i++) {
+        const eater = grassEaterArr[i];
+        eater.eat();
+    }
+    for (let i = 0; i < gishatichner.length; i++) {
+        const gishatich = gishatichner[i];
+        gishatich.eat();
+    }
+    for (let i = 0; i < hrashagorcarr.length; i++) {
+        const hrashagorc = hrashagorcarr[i];
+        hrashagorc.move();
+    }
+    for (let i = 0; i < vorsordarr.length; i++) {
+        const vorsord = vorsordarr[i];
+        vorsord.eat();
+    }
+    for (let i = 0; i < xotabuysarr.length; i++) {
+        const xotabuys = xotabuysarr[i];
+        xotabuys.move();
+    }
+
+
+    io.sockets.emit("send matrix",matrix)
+}
+
+
+
+
+setInterval(game ,  500)
+
+
+
+//////
+
+
+
+io.on("connection", function (){
+    createObject(matrix)
+})
