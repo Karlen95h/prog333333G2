@@ -52,3 +52,8 @@ setInterval(
     socket.on("send matrix", nkarel)
     },500
 )
+
+
+function AddGrass(){
+    socket.emit("addGrass")
+}

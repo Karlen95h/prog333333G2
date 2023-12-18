@@ -43,16 +43,17 @@ module.exports =  class Vorsord extends LivingCreature {
             this.y = y;
         }
 
-        else {
-            let found = this.chooseCell(1);
-            let exact = random(found)
-            let x = exact[0];
-            let y = exact[1];
-            matrix[y][x] = 5;
-            matrix[this.y][this.x] = 1;
-            this.x = x;
-            this.y = y;
-        }
+        // else {
+        //     let found = this.chooseCell(1);
+        //     console.log(found);
+        //     let exact = found[Math.floor(Math.random() * found.length)]
+        //     let x = exact[0];
+        //     let y = exact[1];
+        //     matrix[y][x] = 5;
+        //     matrix[this.y][this.x] = 1;
+        //     this.x = x;
+        //     this.y = y;
+        // }
     }
     eat() {
         let found = this.chooseCell(3);
